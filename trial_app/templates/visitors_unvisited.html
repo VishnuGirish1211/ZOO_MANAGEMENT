@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h1>Visitors Who Haven't Visited</h1>
+        <a href="{{ url_for('visitors') }}" class="btn">Back to All Visitors</a>
+    </div>
+
+    <div class="card">
+        <h2>Report</h2>
+        <p>This report shows all visitors who have purchased a ticket but have not yet been logged as visiting an animal in the 'Visits' table.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- We will pass the 'visitors' list from app.py -->
+                {% for visitor in visitors %}
+                <tr>
+                    <td>{{ visitor.visitor_id }}</td>
+                    <td>{{ visitor.f_name }}</td>
+                    <td>{{ visitor.l_name }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3">All visitors have been logged as visiting an animal.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

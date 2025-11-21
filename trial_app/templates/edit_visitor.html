@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <!-- The visitor object is passed from our app.py route -->
+        <h1>Edit Visitor: {{ visitor.f_name }} {{ visitor.l_name }}</h1>
+        <a href="{{ url_for('visitors') }}" class="btn">Back to Visitor List</a>
+    </div>
+
+    <div class="card">
+        <!-- This form will POST to our /edit_visitor/<id> route -->
+        <form action="{{ url_for('edit_visitor', visitor_id=visitor.visitor_id) }}" method="POST">
+            <div style="margin-bottom: 15px;">
+                <label for="f_name">First Name:</label>
+                <input type="text" name="f_name" value="{{ visitor.f_name }}" style="width:100%; padding: 8px;" required>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="l_name">Last Name:</label>
+                <input type="text" name="l_name" value="{{ visitor.l_name }}" style="width:100%; padding: 8px;" required>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="age">Age:</label>
+                <input type="number" name="age" value="{{ visitor.age }}" style="width:100%; padding: 8px;" required>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="phone_no">Phone Number:</label>
+                <input type="text" name="phone_no" value="{{ visitor.phone_no }}" style="width:100%; padding: 8px;" required>
+            </div>
+            
+            <button type="submit" class="btn btn-success">Save Changes</button>
+        </form>
+    </div>
+{% endblock %}

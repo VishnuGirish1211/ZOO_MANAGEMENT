@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h1>Habitat Management</h1>
+        </div>
+
+    <div class="card">
+        <h2>All Habitats</h2>
+        <p>You can only delete habitats that are empty (contain no animals).</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Capacity</th>
+                    <th>Current Occupancy</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for habitat in habitats %}
+                <tr>
+                    <td>{{ habitat.name }}</td>
+                    <td>{{ habitat.type }}</td>
+                    <td>{{ habitat.capacity }}</td>
+                    <td>{{ habitat.current_occupancy }}</td>
+                    <td>
+                        <form action="{{ url_for('delete_habitat') }}" method="POST" style="display:inline;">
+                            <input type="hidden" name="habitat_id" value="{{ habitat.habitat_id }}">
+                            <button type="submit" 
+                                    class="btn" 
+                                    style="background-color: #dc3545;"
+                                    onclick="return confirm('Are you sure you want to delete this habitat?');">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">No habitats found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

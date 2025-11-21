@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ZooDB Login</title>
+    <style>
+        body { font-family: sans-serif; display: grid; place-items: center; min-height: 90vh; }
+        form { border: 1px solid #ccc; padding: 25px; border-radius: 8px; }
+        div { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        input { width: 300px; padding: 8px; }
+        button { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <form action="/login" method="POST">
+        <h2>Zoo Management System</h2>
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>

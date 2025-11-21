@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h1>Add a New Animal</h1>
+        <a href="{{ url_for('animals') }}" class="btn">Back to Animal List</a>
+    </div>
+
+    <div class="card">
+        <form action="{{ url_for('add_animal') }}" method="POST">
+            <div style="margin-bottom: 15px;">
+                <label for="animal_id">Animal ID:</label>
+                <input type="number" name="animal_id" style="width:100%; padding: 8px;" required>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="name">Name:</label>
+                <input type="text" name="name" style="width:100%; padding: 8px;" required>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="species">Species:</label>
+                <input type="text" name="species" style="width:100%; padding: 8px;" required>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="gender">Gender:</label>
+                <select name="gender" style="width:100%; padding: 8px;" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="age">Age:</label>
+                <input type="number" name="age" style="width:100%; padding: 8px;" required>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="habitat_id">Habitat:</label>
+                <select name="habitat_id" style="width:100%; padding: 8px;" required>
+                    {% for habitat in habitats %}
+                        <option value="{{ habitat.habitat_id }}">
+                            {{ habitat.name }} (Type: {{ habitat.type }})
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-success">Save Animal</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<style>
+    form {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    form div {
+        margin-bottom: 15px;
+    }
+    form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    form input[type="text"],
+    form input[type="number"],
+    form input[type="date"],
+    form select,
+    form textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box; /* Important for 100% width */
+    }
+    form textarea {
+        min-height: 100px;
+    }
+</style>
+
+<h2>Add New Veterinary Record</h2>
+
+<form method="POST">
+    <div>
+        <label for="record_id">Record ID</label>
+        <input type="number" id="record_id" name="record_id" required>
+    </div>
+    
+    <div>
+        <label for="animal_id">Animal</label>
+        <select id="animal_id" name="animal_id" required>
+            <option value="">-- Select an Animal --</option>
+            {% for animal in animals %}
+                <option value="{{ animal.animal_id }}">
+                    {{ animal.name }} (ID: {{ animal.animal_id }}, Species: {{ animal.species }})
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div>
+        <label for="vet_id">Veterinarian</label>
+        <select id="vet_id" name="vet_id" required>
+            <option value="">-- Select a Veterinarian --</option>
+            {% for vet in vets %}
+                <option value="{{ vet.employee_id }}">{{ vet.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div>
+        <label for="checkup_date">Checkup Date</label>
+        <input type="date" id="checkup_date" name="checkup_date" required>
+    </div>
+    
+    <div>
+        <label for="status">Status</label>
+        <input type="text" id="status" name="status" placeholder="e.g., Healthy, Observation, Sick" required>
+    </div>
+    
+    <div>
+        <label for="notes">Notes</label>
+        <textarea id="notes" name="notes" placeholder="Enter details..."></textarea>
+    </div>
+    
+    <div>
+        <button type="submit" class="btn btn-success">Add Record</button>
+    </div>
+</form>
+
+{% endblock %}

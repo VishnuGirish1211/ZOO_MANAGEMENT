@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Veterinary Records</h2>
+<a href="{{ url_for('add_vet_record') }}" class="btn btn-success" style="margin-bottom: 15px;">Add New Record</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Record ID</th>
+            <th>Checkup Date</th>
+            <th>Animal Name</th>
+            <th>Veterinarian</th>
+            <th>Status</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if records %}
+            {% for record in records %}
+            <tr>
+                <td>{{ record.record_id }}</td>
+                <td>{{ record.checkup_date }}</td>
+                <td>{{ record.animal_name }}</td>
+                <td>{{ record.vet_name }}</td>
+                <td>{{ record.status }}</td>
+                <td>{{ record.notes }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="6" style="text-align: center;">No veterinary records found.</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+{% endblock %}
